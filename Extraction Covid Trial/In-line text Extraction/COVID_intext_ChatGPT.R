@@ -4,17 +4,9 @@
 #################################################
 library(pdftools)
 library(dplyr)
-# library(readxl)
-# library(rvest)
 library(stringr)
-# library(htmltools)
-# library(htmlwidgets)
-# library(tidyverse)
-# library(writexl)
-# library(formattable)
 library(httr)
 library(TheOpenAIR)
-
 
 #################################################
 ############### PDF import function #############
@@ -77,20 +69,23 @@ pdf.extraction <- function(src){
   
 temp.x <- read.pdf.EE(src = src)
 
-
+######### Key Word Setting
 Keyword_EX <- " Die|die|Mortal|mortal|Death|death"
 Field_type_key <- "Placebo|placebo|Favipira|favipira|Control|control|FPV|standard|Standard|SOC|AVIFAVIR"
 
 
+####### Result Session
 sub_title_loc1 <- grep("^[A-Z]+$", temp.x, ignore.case = T)
 sub_title_loc2 <- grep(r"{^\d\. [A-Z]+$}", temp.x, ignore.case = T)
 sub_title_loc <- sort(unique(c(sub_title_loc1,sub_title_loc2)))
 result_loc <- sub_title_loc[grep("result|Result", temp.x[sub_title_loc], ignore.case = T)]
 discussion_loc <- sub_title_loc[grep("discussion|DISCUSSION|Discussion", temp.x[sub_title_loc], ignore.case = T)]
 
-####### Result Session
 temp.x_field <- temp.x[result_loc:length(temp.x)]
 
+
+
+########### Data Cleaning for Numeric data format 
 temp.x_number1 <- str_replace_all(temp.x_field,"one|One ", " 1 ")
 temp.x_number2 <- str_replace_all(temp.x_number1,"two|Two", " 2 ")
 temp.x_number3 <- str_replace_all(temp.x_number2,"three|Three", " 3 ")
@@ -99,6 +94,8 @@ temp.x_number5 <- str_replace_all(temp.x_number4,"five|Five ", " 5 ")
 temp.x_number6 <- str_replace_all(temp.x_number5,"six|Six ", " 6 ")
 temp.x_number7 <- str_replace_all(temp.x_number6,"seven|Seven ", " 7 ")
 
+
+######## outcome Key word screening
 keyword_s <- grep(Keyword_EX, temp.x_number7, ignore.case = T)
 
 # First String Clean based on Number exist or not
@@ -658,7 +655,7 @@ response <- chat(chat_command,output = "message")
 response_0 <- str_replace_all(response, " no | not |No |Not", " 0 ")
 response_1 <- str_replace_all(response_0,"\n"," ")
 response_2 <- str_remove_all(response_1,r"{\(}")
-response_3 <- str_replace_all(response_2, ",|;", " ")
+response_3 <- str_replace_all(response_2, ",|;|:", " ")
 
 
 response_word <- strsplit(response_3,split = " ")
@@ -741,26 +738,28 @@ return(return.x)
 
 }
 
-pdf.rob.vector <- list.files("~/COVID", full.names = T)
+pdf.rob.vector <- list.files("~/In-line text Extraction", full.names = T)
 pdf.rob.vector <- pdf.rob.vector[grep("pdf", pdf.rob.vector, ignore.case = T)]
 pdf.rob.vector <- pdf.rob.vector[!grepl("pdftools", pdf.rob.vector)]
 pdf.rob.vector
 
-start.time <- Sys.time()
+# start.time <- Sys.time()
 
 mined.rob1 <- vector()
 
-for(pdf.i in c(5)) {
+for(pdf.i in c(index)) {######## Use the index for articles for in-line data extraction
+                     ######## Enter a single index each time to avoid
+                     ######## the limit request per minute of OPENAI 
   print(pdf.i)
   print(pdf.rob.vector[pdf.i])
   mined.rob1 <-  rbind(mined.rob1, pdf.extraction(src = pdf.rob.vector[pdf.i]))
 }
 
-end.time <- Sys.time()
+# end.time <- Sys.time()
 
 
-time.taken <- round(end.time - start.time,2)
-time.taken
+# time.taken <- round(end.time - start.time,2)
+# time.taken
 
 mined.rob1
 

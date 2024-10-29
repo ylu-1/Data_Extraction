@@ -4,16 +4,7 @@
 #################################################
 library(pdftools)
 library(dplyr)
-# library(readxl)
-# library(rvest)
 library(stringr)
-# library(htmltools)
-# library(htmlwidgets)
-# library(tidyverse)
-# library(writexl)
-# library(formattable)
-
-
 
 #################################################
 ############### PDF import function #############
@@ -627,8 +618,8 @@ return(return.x)
 }
 
 
-start.time <- Sys.time()
-pdf.rob.vector <- list.files("~/COVID", full.names = T)
+# start.time <- Sys.time()
+pdf.rob.vector <- list.files("~/Table Exrtaction", full.names = T)
 pdf.rob.vector <- pdf.rob.vector[grep("pdf", pdf.rob.vector, ignore.case = T)]
 pdf.rob.vector <- pdf.rob.vector[!grepl("pdftools", pdf.rob.vector)]
 pdf.rob.vector
@@ -639,47 +630,19 @@ pdf.rob.vector
 
 mined.rob <- vector()
 
-for(pdf.i in c(2,3,4,6,13)) {
+for(pdf.i in c(index)) { ######## Use the index for articles for table extraction
   print(pdf.i)
   print(pdf.rob.vector[pdf.i])
   mined.rob <-  rbind(mined.rob, pdf.extraction(src = pdf.rob.vector[pdf.i]))
 }
 
-end.time <- Sys.time()
-
-
-time.taken <- round(end.time - start.time,2)
-time.taken
+# end.time <- Sys.time()
+# 
+# 
+# time.taken <- round(end.time - start.time,2)
+# time.taken
 
 mined.rob
-
-mined.rob1
-mined.rob2 <- mined.rob1
-mined.rob2[3,] <- c("Ivaschenko 2020(not find)",2,40, "AVIFAVIR")
-mined.rob3 <- mined.rob2[-4,]
-mined.rob_new <- rbind(mined.rob[,-2],mined.rob3)
-row.names(mined.rob_new) <- mined.rob_new[,1]
-Trt_key <- "Favipira|favipira|FPV|AVIFAVIR|treatment|Treatment"
-
-mine.rob_Trt_s <- grep(Trt_key,mined.rob_new[,4])
-mine.rob_Con <- data.frame(mined.rob_new[-mine.rob_Trt_s,])
-mine.rob_Trt <- data.frame(mined.rob_new[mine.rob_Trt_s,])
-
-test_data <- merge(x = mine.rob_Trt,y = mine.rob_Con,by = 'row.names',all = T)
-test_data[,c(3,4,7,8)] <- sapply(test_data[,c(3,4,7,8)], as.numeric)
-
-test_data[,-1]
-library(meta)
-
-cat("\014")  # this just clears the  console- it has no other purpose
-
-meta1<-metabin(event.e = test_data$Events.x, n.e = test_data$Total.x, 
-               event.c = test_data$Events.y, n.c = test_data$Total.y,
-               studlab=test_data$Reference.x, sm="RR", comb.fixed = T, comb.random = F, data=test_data)
-summary(meta1)
-forest.meta(meta1, col.diamond = "blue", overall.hetstat=F)
-forest.meta(meta1, col.diamond = "blue", overall.hetstat=F,leftlabs = "Article",
-            leftcols = c("X1","studlab","event.e","n.e","event.c","n.c"))
 
 
 

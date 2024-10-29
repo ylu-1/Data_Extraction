@@ -1,0 +1,6 @@
+There were 5 articles applied table extraction methods, which are given below with corresponding DOI.
+Chuah 2021: DOI: https://doi.org/10.1093/cid/ciab962
+Finberg 2021: DOI: https://doi.org/10.1093/ofid/ofab563
+Golan 2022: DOI: https://doi.org/10.1093/cid/ciac712
+Mahmudie 2022: DOI: https://doi.org/10.4103/jfmpc.jfmpc_1058_22
+Udwadia 2020: DOI: https://doi.org/10.1016/j.ijid.2020.11.142
