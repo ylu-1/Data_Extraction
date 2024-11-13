@@ -54,7 +54,7 @@ read.pdf.EE <- function(src)
 
 
 
-######### Extraction start
+######### Table Extraction Function
 
 pdf.extraction <- function(src){
   
@@ -618,31 +618,6 @@ return(return.x)
 }
 
 
-# start.time <- Sys.time()
-pdf.rob.vector <- list.files("~/Table Exrtaction", full.names = T)
-pdf.rob.vector <- pdf.rob.vector[grep("pdf", pdf.rob.vector, ignore.case = T)]
-pdf.rob.vector <- pdf.rob.vector[!grepl("pdftools", pdf.rob.vector)]
-pdf.rob.vector
-
-
-
-
-
-mined.rob <- vector()
-
-for(pdf.i in c(index)) { ######## Use the index for articles for table extraction
-  print(pdf.i)
-  print(pdf.rob.vector[pdf.i])
-  mined.rob <-  rbind(mined.rob, pdf.extraction(src = pdf.rob.vector[pdf.i]))
-}
-
-# end.time <- Sys.time()
-# 
-# 
-# time.taken <- round(end.time - start.time,2)
-# time.taken
-
-mined.rob
 
 
 
