@@ -1,14 +1,14 @@
-There were 6 articles applied in-line text extraction methods, which are given below with corresponding DOI.
+There were six articles on which the in-line text extraction methods were applied:
 AlQahatani 2022: https://doi.org/10.1038/s41598-022-08794-w
 Ivaschenko 2020: https://doi.org/10.1093/cid/ciaa1176 
 Shah 2023: https://doi.org/10.1016/S2213-2600(22)00412-X
 Shenoy 2021: https://doi.org/10.1101/2021.11.08.21265884
 Solaymani-Dodaran 2021: https://doi.org/10.1016/j.intimp.2021.107522
-Tabarsi 2021: https://doi.org/10.22037/ijpr.2021.115510.15401 
+Tabarsi 2021: https://doi.org/10.22037/ijpr.2021.115510.15401
 
-There were 5 articles applied table extraction methods, which are given below with corresponding DOI.
-Chuah 2021: DOI: https://doi.org/10.1093/cid/ciab962
-Finberg 2021: DOI: https://doi.org/10.1093/ofid/ofab563
-Golan 2022: DOI: https://doi.org/10.1093/cid/ciac712
-Mahmudie 2022: DOI: https://doi.org/10.4103/jfmpc.jfmpc_1058_22
-Udwadia 2020: DOI: https://doi.org/10.1016/j.ijid.2020.11.142
+There were five articles on which the table extraction methods were applied:
+Chuah 2021: https://doi.org/10.1093/cid/ciab962
+Finberg 2021: https://doi.org/10.1093/ofid/ofab563
+Golan 2022: https://doi.org/10.1093/cid/ciac712
+Mahmudie 2022: https://doi.org/10.4103/jfmpc.jfmpc_1058_22
+Udwadia 2020: https://doi.org/10.1016/j.ijid.2020.11.142
