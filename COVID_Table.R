@@ -114,7 +114,6 @@ for (i in 1:length(table_location)) {
 
 table_start <- table_start[which(table_start != "NA")]
 
-temp.x.new[table_start]
 
 # Check where the Table Value End & consider the truncated line in table
 
@@ -505,8 +504,7 @@ table_result <- rbind(table_source1,table_val)
 
 
 
-
-
+row.names(table_result) <- c(rep("",length(table_result[,1])))
 
 
 
@@ -600,7 +598,7 @@ table_s
 
 title <- vector()
 
-file.title.temp <- str_extract(src, regex("/.+", ignore_case = T))
+file.title.temp <- str_extract(src, regex("/.+", ignore_case = TRUE))
 file.title <- strsplit(file.title.temp, split = "/")
 title <- file.title[[1]][grep(".pdf", file.title[[1]], ignore.case = T)]
 
